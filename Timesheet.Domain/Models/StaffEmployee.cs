@@ -4,9 +4,10 @@ namespace Timesheet.Domain.Models
 {
     public class StaffEmployee : Employee
     {
-        public StaffEmployee(string lastName, decimal salary) : base(lastName, salary, "Staff")
+        public StaffEmployee(string lastName, decimal salary) : base(lastName, salary, Position.Staff)
         {
         }
+
         public override decimal CalculateBill(TimeLog[] timeLogs)
         {
             var totalHours = timeLogs.Sum(x => x.WorkingHours);
@@ -42,7 +43,7 @@ namespace Timesheet.Domain.Models
         public override bool CheckInputLog(TimeLog timeLog)
         {
             bool isValid = base.CheckInputLog(timeLog);
-            isValid = timeLog.LastName == this.LastName && isValid;
+            isValid = timeLog.Name == this.LastName && isValid;
             return isValid;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Timesheet.Api.ResourceModels;
+using Timesheet.BussinessLogic.Exceptions;
 using Timesheet.Domain;
 
 namespace Timesheet.Api.Controllers
@@ -18,7 +19,21 @@ namespace Timesheet.Api.Controllers
         [HttpPost]
         public ActionResult<string> Login(LoginRequest request)
         {
-            return Ok(_authService.Login(request.LastName));
+            try
+            {
+                var token = _authService.Login(request.LastName);
+
+                return Ok(token);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }

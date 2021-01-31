@@ -17,8 +17,7 @@ namespace Timesheet.Api.Controllers
         [HttpPost]
         public ActionResult<bool> Add(ChiefEmployee ChiefEmployee)
         {
-            return Ok(_employeeService.AddEmployee(ChiefEmployee));
+            return Ok(_employeeService.Add(ChiefEmployee));
         }
-        
     }
 }

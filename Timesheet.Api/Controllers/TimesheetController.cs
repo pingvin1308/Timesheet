@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace Timesheet.Api.Controllers
     public class TimesheetController : Controller
     {
         private readonly ITimeSheetService _timeSheetService;
-        public TimesheetController(ITimeSheetService timeSheetService)
+        private readonly IMapper _mapper;
+        public TimesheetController(ITimeSheetService timeSheetService, IMapper mapper)
         {
             _timeSheetService = timeSheetService;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -26,13 +29,7 @@ namespace Timesheet.Api.Controllers
 
             if (ModelState.IsValid)
             {
-                var timeLog = new TimeLog
-                {
-                    Comment = request.Comment,
-                    Date = request.Date,
-                    LastName = request.LastName,
-                    WorkingHours = request.WorkingHours
-                };
+                var timeLog = _mapper.Map<TimeLog>(request);
 
                 var result = _timeSheetService.TrackTime(timeLog, lastName);
                 return Ok(result);

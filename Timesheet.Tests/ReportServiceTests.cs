@@ -27,21 +27,21 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-2),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now,
                         WorkingHours = 4,
                         Comment = Guid.NewGuid().ToString()
@@ -50,7 +50,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new StaffEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -91,21 +91,21 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-2),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now,
                         WorkingHours = 4,
                         Comment = Guid.NewGuid().ToString()
@@ -114,7 +114,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new ChiefEmployee(expectedLastName, salary, bonus))
                 .Verifiable();
 
@@ -154,21 +154,21 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-2),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8,
                         Comment = Guid.NewGuid().ToString()
                     },
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Date = DateTime.Now,
                         WorkingHours = 4,
                         Comment = Guid.NewGuid().ToString()
@@ -177,7 +177,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new FreelancerEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -217,7 +217,7 @@ namespace Timesheet.Tests
             var expectedTotalHours = 281m;
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(x => x == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(x => x == expectedLastName)))
                 .Returns(() => new StaffEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -229,7 +229,7 @@ namespace Timesheet.Tests
                     DateTime dateTime = new DateTime(2020, 11, 1);
                     timeLogs[0] = new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = dateTime,
                         WorkingHours = 9
@@ -239,7 +239,7 @@ namespace Timesheet.Tests
                         dateTime = dateTime.AddDays(1);
                         timeLogs[i] = new TimeLog
                         {
-                            LastName = expectedLastName,
+                            Name = expectedLastName,
                             Comment = Guid.NewGuid().ToString(),
                             Date = dateTime,
                             WorkingHours = 8
@@ -281,7 +281,7 @@ namespace Timesheet.Tests
             var expectedTotalHours = 281m;
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(x => x == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(x => x == expectedLastName)))
                 .Returns(() => new ChiefEmployee(expectedLastName, salary, bonus))
                 .Verifiable();
 
@@ -293,7 +293,7 @@ namespace Timesheet.Tests
                     DateTime dateTime = new DateTime(2020, 11, 1);
                     timeLogs[0] = new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = dateTime,
                         WorkingHours = 9
@@ -303,7 +303,7 @@ namespace Timesheet.Tests
                         dateTime = dateTime.AddDays(1);
                         timeLogs[i] = new TimeLog
                         {
-                            LastName = expectedLastName,
+                            Name = expectedLastName,
                             Comment = Guid.NewGuid().ToString(),
                             Date = dateTime,
                             WorkingHours = 8
@@ -344,7 +344,7 @@ namespace Timesheet.Tests
             var expectedTotalHours = 281m;
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(x => x == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(x => x == expectedLastName)))
                 .Returns(() => new FreelancerEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -356,7 +356,7 @@ namespace Timesheet.Tests
                     DateTime dateTime = new DateTime(2020, 11, 1);
                     timeLogs[0] = new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = dateTime,
                         WorkingHours = 9
@@ -366,7 +366,7 @@ namespace Timesheet.Tests
                         dateTime = dateTime.AddDays(1);
                         timeLogs[i] = new TimeLog
                         {
-                            LastName = expectedLastName,
+                            Name = expectedLastName,
                             Comment = Guid.NewGuid().ToString(),
                             Date = dateTime,
                             WorkingHours = 8
@@ -409,7 +409,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new StaffEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -450,7 +450,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new ChiefEmployee(expectedLastName, salary, bonus))
                 .Verifiable();
 
@@ -489,7 +489,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new FreelancerEmployee(expectedLastName, 70000))
                 .Verifiable();
 
@@ -531,7 +531,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8
@@ -540,7 +540,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new StaffEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -583,7 +583,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8
@@ -592,7 +592,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new ChiefEmployee(expectedLastName, salary, bonus))
                 .Verifiable();
 
@@ -634,7 +634,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 8
@@ -643,7 +643,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new FreelancerEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -683,7 +683,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 12
@@ -692,7 +692,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new StaffEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -732,7 +732,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 12
@@ -741,7 +741,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new FreelancerEmployee(expectedLastName, salary))
                 .Verifiable();
 
@@ -782,7 +782,7 @@ namespace Timesheet.Tests
                 {
                     new TimeLog
                     {
-                        LastName = expectedLastName,
+                        Name = expectedLastName,
                         Comment = Guid.NewGuid().ToString(),
                         Date = DateTime.Now.AddDays(-1),
                         WorkingHours = 12
@@ -791,7 +791,7 @@ namespace Timesheet.Tests
                 .Verifiable();
 
             employeeRepositoryMock
-                .Setup(x => x.GetEmployee(It.Is<string>(y => y == expectedLastName)))
+                .Setup(x => x.Get(It.Is<string>(y => y == expectedLastName)))
                 .Returns(() => new ChiefEmployee(expectedLastName, salary, bonus))
                 .Verifiable();
 

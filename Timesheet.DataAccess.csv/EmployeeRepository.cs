@@ -18,13 +18,13 @@ namespace Timesheet.DataAccess.csv
             _path = csvSettings.Path + "\\employees.csv";
         }
 
-        public void AddEmployee(Employee employee)
+        public void Add(Employee employee)
         {                        
             var dataRow = employee.GetPersonalData(_delimeter);
             File.AppendAllText(_path, dataRow);
         }
 
-        public Employee GetEmployee(string lastName)
+        public Employee Get(string lastName)
         {
             var data = File.ReadAllText(_path);
             var dataRows = data.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);

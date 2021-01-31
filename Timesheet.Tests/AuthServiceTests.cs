@@ -22,7 +22,7 @@ namespace Timesheet.Tests
             //arrange
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
 
@@ -46,7 +46,7 @@ namespace Timesheet.Tests
             string lastName = "Иванов";
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
                 .Returns(() => new StaffEmployee(lastName, 70000))
                 .Verifiable();
 
@@ -79,7 +79,7 @@ namespace Timesheet.Tests
             var result = service.Login(lastName);
 
             //assert
-            employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Never);
+            employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Never);
 
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.IsEmpty(UserSessions.Sessions);
@@ -93,7 +93,7 @@ namespace Timesheet.Tests
             var employeeRepositoryMock = new Mock<IEmployeeRepository>();
 
             employeeRepositoryMock.
-                Setup(x => x.GetEmployee(It.Is<string>(y => y == lastName)))
+                Setup(x => x.Get(It.Is<string>(y => y == lastName)))
 
                 .Returns(() => null);
 
@@ -104,7 +104,7 @@ namespace Timesheet.Tests
 
             //assert
 
-            employeeRepositoryMock.Verify(x => x.GetEmployee(lastName), Times.Once);
+            employeeRepositoryMock.Verify(x => x.Get(lastName), Times.Once);
 
             Assert.False(string.IsNullOrWhiteSpace(result));
             Assert.IsTrue(UserSessions.Sessions.Contains(lastName) == false);
