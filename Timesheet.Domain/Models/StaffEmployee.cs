@@ -4,7 +4,7 @@ namespace Timesheet.Domain.Models
 {
     public class StaffEmployee : Employee
     {
-        public StaffEmployee(string lastName, decimal salary) : base(lastName, salary, "Staff")
+        public StaffEmployee(string lastName, decimal salary) : base(lastName, salary, Position.Staff)
         {
         }
         public override decimal CalculateBill(TimeLog[] timeLogs)

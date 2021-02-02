@@ -21,7 +21,7 @@ namespace Timesheet.BussinessLogic.Services
 
         public EmployeeReport GetEmployeeReport(string lastName)
         {
-            var employee = _employeeRepository.GetEmployee(lastName);
+            var employee = _employeeRepository.Get(lastName);
             var timeLogs = _timesheetRepository.GetTimeLogs(employee.LastName);
 
             if (timeLogs == null || timeLogs.Length == 0)

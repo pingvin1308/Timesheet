@@ -18,7 +18,7 @@ namespace Timesheet.BussinessLogic.Services
 
         public bool TrackTime(TimeLog timeLog, string lastName)
         {
-            var employee = _employeeRepository.GetEmployee(lastName);
+            var employee = _employeeRepository.Get(lastName);
             
             bool isValid = employee != null ? employee.CheckInputLog(timeLog) : false;
 

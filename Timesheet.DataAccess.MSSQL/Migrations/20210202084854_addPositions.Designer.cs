@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.DataAccess.MSSQL;
 
 namespace Timesheet.DataAccess.MSSQL.Migrations
 {
     [DbContext(typeof(TimesheetContext))]
-    partial class TimesheetContextModelSnapshot : ModelSnapshot
+    [Migration("20210202084854_addPositions")]
+    partial class addPositions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,30 +43,6 @@ namespace Timesheet.DataAccess.MSSQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Bonus = 20000m,
-                            LastName = "Иванов",
-                            Position = 0,
-                            Salary = 200000m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            LastName = "Сидоров",
-                            Position = 2,
-                            Salary = 1000m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            LastName = "Петров",
-                            Position = 1,
-                            Salary = 120000m
-                        });
                 });
 
             modelBuilder.Entity("Timesheet.DataAccess.MSSQL.Entities.TimeLog", b =>

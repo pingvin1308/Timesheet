@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,7 @@ using Timesheet.Api.Models;
 using Timesheet.BussinessLogic.Services;
 using Timesheet.DataAccess.csv;
 using Timesheet.DataAccess.MSSQL;
+using Timesheet.DataAccess.MSSQL.Repositories;
 using Timesheet.Domain;
 using Timesheet.Integrations.GitHub;
 
@@ -32,7 +34,7 @@ namespace Timesheet.Api
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<ITimesheetRepository, TimesheetRepository>();
             services.AddTransient<ITimeSheetService, TimesheetService>();
-            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IEmployeeRepository, DataAccess.MSSQL.Repositories.EmployeeRepository>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IIssuesService, IssuesService>();
@@ -44,6 +46,7 @@ namespace Timesheet.Api
             services.AddDbContext<TimesheetContext>(x => 
                 x.UseSqlServer(Configuration.GetConnectionString("TimesheetContext")));
 
+            services.AddAutoMapper(typeof(ApiMappingProfile),typeof(DataAccessMappingProfile));
             services.AddControllers().AddFluentValidation();
             services.AddControllers().AddNewtonsoftJson();
         }

@@ -4,7 +4,7 @@ namespace Timesheet.Domain
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployee(string lastName);
-        void AddEmployee(Employee staffEmployee);
+        Employee Get(string lastName);
+        void Add(Employee staffEmployee);
     }
 }

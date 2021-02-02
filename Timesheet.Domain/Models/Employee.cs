@@ -10,7 +10,7 @@ namespace Timesheet.Domain.Models
         protected const decimal MAX_WORKING_HOURS_PER_MONTH = 160;
         protected const decimal MAX_WORKING_HOURS_PER_DAY = 8;
 
-        public Employee(string lastname, decimal salary, string position)
+        public Employee(string lastname, decimal salary, Position position)
         {
             LastName = lastname;
             Salary = salary;
@@ -20,7 +20,7 @@ namespace Timesheet.Domain.Models
         public string LastName { get; set; }
         public decimal Salary { get; set; }
 
-        public string Position { get; set; }
+        public Position Position { get; set; }
 
         public abstract decimal CalculateBill(TimeLog[] timeLogs);
         public abstract string GetPersonalData(char delimeter);
