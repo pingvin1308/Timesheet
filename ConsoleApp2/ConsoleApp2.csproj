@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NEST" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Timesheet.API.ClientSDK\Timesheet.Api.ClientSDK.csproj" />
   </ItemGroup>
 

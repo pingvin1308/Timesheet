@@ -1,6 +1,5 @@
-﻿using MyNamespace;
+﻿using Nest;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ConsoleApp2
@@ -9,16 +8,27 @@ namespace ConsoleApp2
     {
         static async Task Main(string[] args)
         {
-            var client = new AuthClient("https://localhost:5001/", new HttpClient());
+            var node = new Uri("http://localhost:9210");
+            var settings = new ConnectionSettings(node)
+                .DefaultIndex("people");
+            
+            var client = new ElasticClient(settings);
 
-            var request = new LoginRequest()
+            var person = new Person
             {
-                LastName = "Иванов"
+                Id = 1,
+                FirstName = "Martijn",
+                LastName = "Laarman"
             };
 
-            var token = await client.LoginAsync(request);
-
-            Console.WriteLine(token);
+            var indexResponse = client.IndexDocument(person);
         }
+    }
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

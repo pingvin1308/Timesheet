@@ -1,7 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Serilog;
+using Serilog.Context;
 using Timesheet.Api.Models;
 using Timesheet.Domain;
 using Timesheet.Domain.Models;
@@ -28,7 +31,7 @@ namespace Timesheet.Api.Controllers
         [HttpPost]
         public ActionResult<bool> TrackTime(CreateTimeLogRequest request)
         {
-            _logger.LogInformation("Пользователь фиксирует рабочее время" + JsonConvert.SerializeObject(request, Formatting.Indented));
+            _logger.LogInformation("Пользователь фиксирует рабочее время {@Request}", request);
 
             var lastName = (string)HttpContext.Items["LastName"];
 
@@ -37,7 +40,7 @@ namespace Timesheet.Api.Controllers
                 var timeLog = _mapper.Map<TimeLog>(request);
 
                 var result = _timeSheetService.TrackTime(timeLog, lastName);
-                _logger.LogInformation("Пользователь успешно зафиксирова время");
+                _logger.LogInformation("Пользователь успешно зафиксировал время");
                 return Ok(result);
             }
 

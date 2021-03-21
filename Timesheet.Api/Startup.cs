@@ -3,17 +3,15 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.IO;
 using Timesheet.Api.Models;
 using Timesheet.BussinessLogic.Services;
-//using Timesheet.DataAccess.csv;
 using Timesheet.DataAccess.MSSQL;
 using Timesheet.DataAccess.MSSQL.Repositories;
 using Timesheet.Domain;
@@ -71,11 +69,6 @@ namespace Timesheet.Api
 
             services.AddControllers().AddFluentValidation();
             services.AddControllers().AddNewtonsoftJson();
-
-            var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetService<ILogger<ControllerBase>>();
-            services.AddSingleton(typeof(ILogger), logger);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +79,8 @@ namespace Timesheet.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSerilogRequestLogging();
+            
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Timesheet V1");

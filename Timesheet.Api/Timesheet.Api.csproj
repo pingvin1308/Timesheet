@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<UserSecretsId>eca6976c-ae68-405b-82ff-6fcfe6ed1a34</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,14 +22,19 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
-		<PackageReference Include="NLog" Version="4.7.7" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="4.10.0" />
 		<PackageReference Include="NSwag.AspNetCore" Version="13.10.2" />
 		<PackageReference Include="NSwag.MSBuild" Version="13.10.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+		<PackageReference Include="Serilog.Exceptions" Version="6.1.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.4" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
 	</ItemGroup>
@@ -40,9 +46,9 @@
 		<ProjectReference Include="..\Timesheet.Integrations.GitHub\Timesheet.Integrations.GitHub.csproj" />
 	</ItemGroup>
 
-	<Target Name="NSwag" AfterTargets="PostBuildEvent">
+	<!--<Target Name="NSwag" AfterTargets="PostBuildEvent">
 		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Core31) aspnetcore2openapi /project:$(ProjectPath) /noBuild:true /outputType:OpenApi3 /output:swagger.json" />
 		<Exec Command="$(NSwagExe_Core31) openapi2csclient /input:swagger.json /output:../Timesheet.Api.ClientSDK/TimesheetAPI.cs" />
-	</Target>
+	</Target>-->
 	
 </Project>

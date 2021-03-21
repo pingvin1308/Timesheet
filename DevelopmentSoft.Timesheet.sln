@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.DataAccess.MSSQL"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.DataAccess.MSSQL.Tests", "Timesheet.DataAccess.MSSQL.Tests\Timesheet.DataAccess.MSSQL.Tests.csproj", "{B0636ED0-F0DD-41F8-8ED8-1D7EF4E3C279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{DF61CAF7-2173-484B-9135-5C3820A70B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{DF61CAF7-2173-484B-9135-5C3820A70B4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Api.ClientSDK", "Timesheet.API.ClientSDK\Timesheet.Api.ClientSDK.csproj", "{CFED4B7C-8D1D-4D88-BAE7-ACCCD7AB314D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timesheet.Api.ClientSDK", "Timesheet.API.ClientSDK\Timesheet.Api.ClientSDK.csproj", "{CFED4B7C-8D1D-4D88-BAE7-ACCCD7AB314D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
