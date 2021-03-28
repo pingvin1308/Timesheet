@@ -16,19 +16,19 @@ namespace Timesheet.Api
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile(
-                    $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
-                    optional: true)
-                .Build();
+            //var configuration = new ConfigurationBuilder()
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .AddJsonFile(
+            //        $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+            //        optional: true)
+            //    .Build();
 
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .Enrich.WithMachineName()
-                .Enrich.WithExceptionDetails()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //    .Enrich.FromLogContext()
+            //    .Enrich.WithMachineName()
+            //    .Enrich.WithExceptionDetails()
+            //    .ReadFrom.Configuration(configuration)
+            //    .CreateLogger();
 
             try
             {
@@ -36,8 +36,8 @@ namespace Timesheet.Api
             }
             catch (Exception ex)
             {
-                Log.Fatal($"Failed to start {Assembly.GetExecutingAssembly().GetName().Name}"+" {Exception}", ex);
-                Log.CloseAndFlush();
+                //Log.Fatal($"Failed to start {Assembly.GetExecutingAssembly().GetName().Name}"+" {Exception}", ex);
+                //Log.CloseAndFlush();
                 throw;
             }
         }
@@ -45,12 +45,13 @@ namespace Timesheet.Api
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-                .UseSerilog((context, configuration) =>
-                {
-                    configuration
-                        .Enrich.FromLogContext()
-                        .Enrich.WithMachineName()
-                        .ReadFrom.Configuration(context.Configuration);
-                });
+                //.UseSerilog((context, configuration) =>
+                //{
+                //    configuration
+                //        .Enrich.FromLogContext()
+                //        .Enrich.WithMachineName()
+                //        .ReadFrom.Configuration(context.Configuration);
+                //})
+            ;
     }
 }

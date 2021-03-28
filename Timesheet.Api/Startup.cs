@@ -16,6 +16,9 @@ using Timesheet.DataAccess.MSSQL;
 using Timesheet.DataAccess.MSSQL.Repositories;
 using Timesheet.Domain;
 using Timesheet.Integrations.GitHub;
+using OpenTelemetry.Trace;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Timesheet.Api
 {
@@ -31,6 +34,13 @@ namespace Timesheet.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOpenTelemetryTracing(builder =>
+                builder
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddSqlClientInstrumentation(options => options.SetDbStatementForText = true)
+                    .AddZipkinExporter()
+                    .AddConsoleExporter());
 
             services.AddAutoMapper(typeof(ApiMappingProfile), typeof(DataAccessMappingProfile));
 
@@ -46,14 +56,14 @@ namespace Timesheet.Api
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IIssuesService, IssuesService>();
 
-            services.AddTransient<IIssuesClient>(x => new IssuesClient("token"));
+            services.AddTransient<IIssuesClient>(x => new IssuesClient("1afaf723e5c301e0ab5eb2d0dd61b59303694389"));
 
             //services.AddSingleton(x => new CsvSettings(';', "..\\Timesheet.DataAccess.csv\\Data"));
 
             services.AddOptions<JwtConfig>()
                 .Bind(Configuration.GetSection("JwtConfig"));
 
-            services.AddDbContext<TimesheetContext>(x => 
+            services.AddDbContext<TimesheetContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("TimesheetContext")));
 
             services.AddSwaggerGen(c =>
@@ -79,8 +89,8 @@ namespace Timesheet.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSerilogRequestLogging();
-            
+            //app.UseSerilogRequestLogging();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Timesheet V1");
@@ -93,7 +103,7 @@ namespace Timesheet.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
+
             app.UseAuthorization();
 
             app.UseMiddleware<JwtAuthMiddleware>();
